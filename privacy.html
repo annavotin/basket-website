@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy Policy — Basket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --forest:      #2C3A1E;
+  --forest-deep: #1E2914;
+  --matcha:      #7CC96E;
+  --moss:        #5A6B45;
+  --moss-faint:  #8A9A72;
+  --lime:        #CDEB6A;
+  --cream:       #FBFBF4;
+  --sage-bg:     #E7EEDD;
+  --card-line:   rgba(44,58,30,.08);
+  --f: 'Merriweather', Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f);
+  background: var(--cream);
+  color: var(--forest);
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px;
+  background: rgba(30,41,20,.96);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(12px);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 11px;
+  text-decoration: none; color: var(--cream);
+}
+.nav-logo-name { font-size: 18px; font-weight: 700; letter-spacing: -.01em; color: var(--cream); }
+.btn-ghost {
+  font-family: var(--f); font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,.6); background: none; border: none;
+  cursor: pointer; text-decoration: none; transition: color .15s;
+}
+.btn-ghost:hover { color: #fff; }
+
+.page-hero {
+  background: var(--forest-deep);
+  padding: 120px 48px 64px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.page-hero-inner { max-width: 760px; margin: 0 auto; }
+.page-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--moss-faint); margin-bottom: 16px;
+}
+.page-h1 {
+  font-size: clamp(32px, 4vw, 48px); font-weight: 900; line-height: 1.1;
+  color: #fff; letter-spacing: -.02em;
+}
+.page-meta {
+  margin-top: 14px; font-size: 13px; font-weight: 300;
+  color: rgba(255,255,255,.4);
+}
+
+.article-wrap {
+  max-width: 760px; margin: 0 auto;
+  padding: 64px 48px 96px;
+}
+
+.article-wrap h2 {
+  font-size: 20px; font-weight: 700; color: var(--forest);
+  letter-spacing: -.01em; margin: 48px 0 14px;
+  padding-top: 48px; border-top: 1px solid var(--card-line);
+}
+.article-wrap h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.article-wrap h3 {
+  font-size: 15px; font-weight: 700; color: var(--forest);
+  margin: 28px 0 10px;
+}
+.article-wrap p {
+  font-size: 15px; font-weight: 300; line-height: 1.8;
+  color: var(--moss); margin-bottom: 14px;
+}
+.article-wrap ul, .article-wrap ol {
+  margin: 10px 0 14px 20px;
+}
+.article-wrap li {
+  font-size: 15px; font-weight: 300; line-height: 1.8;
+  color: var(--moss); margin-bottom: 6px;
+}
+.article-wrap strong { font-weight: 700; color: var(--forest); }
+.article-wrap a { color: var(--forest); font-weight: 700; }
+.article-wrap a:hover { color: var(--moss); }
+
+.data-table {
+  width: 100%; border-collapse: collapse; margin: 20px 0 28px;
+  font-size: 13.5px;
+}
+.data-table th {
+  text-align: left; padding: 10px 14px;
+  background: var(--sage-bg); color: var(--forest);
+  font-weight: 700; font-size: 11px; letter-spacing: .06em;
+  text-transform: uppercase; border-bottom: 1px solid var(--card-line);
+}
+.data-table td {
+  padding: 11px 14px; border-bottom: 1px solid var(--card-line);
+  color: var(--moss); font-weight: 300; line-height: 1.6; vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+footer {
+  background: var(--forest-deep);
+  padding: 40px 48px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.footer-inner { max-width: 760px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.25); font-family: var(--f); }
+.footer-links { display: flex; gap: 20px; list-style: none; }
+.footer-links a {
+  font-size: 12px; color: rgba(255,255,255,.35);
+  text-decoration: none; font-family: var(--f); transition: color .15s;
+}
+.footer-links a:hover { color: rgba(255,255,255,.7); }
+
+@media (max-width: 640px) {
+  nav { padding: 0 20px; }
+  .page-hero { padding: 100px 20px 48px; }
+  .article-wrap { padding: 48px 20px 72px; }
+  footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg viewBox="0 0 200 200" width="26" height="26" fill="none">
+      <path d="M46 21 H25 V61 Q25 87 51 87 H149 Q175 87 175 61 V21 H154"
+        stroke="#CDEB6A" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="61" y="13" width="78" height="22" rx="11" fill="#CDEB6A"/>
+      <path d="M46 116 H25 V156 Q25 182 51 182 H149 Q175 182 175 156 V116 H154"
+        stroke="rgba(255,255,255,.35)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="61" y="108" width="78" height="22" rx="11" fill="rgba(255,255,255,.35)"/>
+    </svg>
+    <span class="nav-logo-name">Basket</span>
+  </a>
+  <a class="btn-ghost" href="mailto:avotin28@gmail.com">Support</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-kicker">Legal</div>
+    <h1 class="page-h1">Privacy Policy</h1>
+    <p class="page-meta">Last updated: June 25, 2026</p>
+  </div>
+</div>
+
+<div class="article-wrap">
+
+  <h2>Who we are</h2>
+  <p>Basket is a meal prep tracking app made by <strong>Anna Votin</strong>. If you have questions about this policy, email <a href="mailto:avotin28@gmail.com">avotin28@gmail.com</a>.</p>
+
+  <h2>What data we collect and why</h2>
+
+  <h3>Account information</h3>
+  <p>When you create an account, we collect your <strong>email address</strong> and a <strong>password</strong> (stored as a secure hash — we never see the plaintext). We use this solely to let you sign in and sync your data across devices.</p>
+  <p>You can use Basket in local-only mode without creating an account. In that case, no account data is collected.</p>
+
+  <h3>App content you create</h3>
+  <p>When you use Basket, you create meal prep cycles, pantry items, extra meals, and custom food entries. This includes:</p>
+  <ul>
+    <li>Food names, weights, and calorie/macro values you enter</li>
+    <li>Dates of your meal prep cycles</li>
+    <li>Display name and unit preferences</li>
+  </ul>
+  <p>If you are signed in, this data is synced to our servers (Supabase) so it is available across your devices. If you are not signed in, it stays only on your device.</p>
+
+  <h3>Receipt images</h3>
+  <p>If you use the receipt scan feature, you select a photo from your photo library. That image is compressed on your device and sent to our server, which forwards it to a third-party AI service (Anthropic Claude) to extract food line items. <strong>The image is not stored on our servers</strong> — it is processed in memory and the result (a list of food names and estimated calories) is returned to your device. The temporary image transmission is encrypted in transit.</p>
+
+  <h3>Barcode scans</h3>
+  <p>When you scan a product barcode, the barcode number is sent to the <strong>USDA FoodData Central</strong> public API to look up nutritional information. No personal information is included in this request.</p>
+
+  <h3>Device permissions</h3>
+  <ul>
+    <li><strong>Camera</strong> — used only to scan barcodes. We do not access the camera at any other time.</li>
+    <li><strong>Photo library</strong> — accessed only when you choose to scan a receipt. We read only the image you select.</li>
+  </ul>
+  <p>We do not access your contacts, location, microphone, or any other device data.</p>
+
+  <h2>What we do not collect</h2>
+  <ul>
+    <li>Location data</li>
+    <li>Device identifiers or advertising IDs</li>
+    <li>Browsing or usage analytics</li>
+    <li>Crash reports sent to third-party analytics services</li>
+    <li>Any data from contacts, calendar, or other apps</li>
+  </ul>
+
+  <h2>Who we share data with</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Recipient</th>
+        <th>Purpose</th>
+        <th>Data shared</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Supabase</strong> (supabase.com)</td>
+        <td>Database and authentication hosting</td>
+        <td>Account credentials, app content you create</td>
+      </tr>
+      <tr>
+        <td><strong>USDA FoodData Central</strong> (api.data.gov)</td>
+        <td>Barcode → nutrition lookup</td>
+        <td>Barcode number only</td>
+      </tr>
+      <tr>
+        <td><strong>Anthropic</strong> (anthropic.com)</td>
+        <td>Receipt image parsing</td>
+        <td>Receipt image (not stored by Anthropic per their API policy)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>We do not sell your data. We do not share it with advertisers.</p>
+
+  <h2>Data retention</h2>
+  <ul>
+    <li><strong>Account and app data</strong> is kept as long as your account exists.</li>
+    <li>You can delete your account at any time from <strong>Settings → Account → Delete Account</strong>. This permanently deletes your account and all synced data from our servers.</li>
+    <li>Local-only data (no account) is stored on your device and can be removed by deleting the app.</li>
+  </ul>
+
+  <h2>Security</h2>
+  <p>Your password is hashed by Supabase before storage. Data in transit is encrypted using TLS. We do not have access to your plaintext password.</p>
+
+  <h2>Children</h2>
+  <p>Basket is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal data, contact us and we will delete it.</p>
+
+  <h2>Your rights</h2>
+  <p>Depending on where you live, you may have the right to:</p>
+  <ul>
+    <li>Access the personal data we hold about you</li>
+    <li>Correct inaccurate data</li>
+    <li>Delete your data (use the in-app Delete Account feature, or email us)</li>
+    <li>Export your data (email us)</li>
+  </ul>
+  <p>To exercise any of these rights, email <a href="mailto:avotin28@gmail.com">avotin28@gmail.com</a>.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If we make material changes, we will update the "Last updated" date above. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
+
+  <h2>Contact</h2>
+  <p>Anna Votin<br><a href="mailto:avotin28@gmail.com">avotin28@gmail.com</a></p>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 Basket. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

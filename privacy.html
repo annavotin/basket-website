@@ -185,8 +185,12 @@ footer {
   <h3>Receipt images</h3>
   <p>If you use the receipt scan feature, you select a photo from your photo library. That image is compressed on your device and sent to our server, which forwards it to a third-party AI service (Anthropic Claude) to extract food line items. <strong>The image is not stored on our servers</strong> — it is processed in memory and the result (a list of food names and estimated calories) is returned to your device. The temporary image transmission is encrypted in transit.</p>
 
-  <h3>Barcode scans</h3>
-  <p>When you scan a product barcode, the barcode number is sent to the <strong>USDA FoodData Central</strong> public API to look up nutritional information. No personal information is included in this request.</p>
+  <h3>Barcode scans and food search</h3>
+  <p>When you scan a product barcode or search for a food by name, the barcode number or search term is sent to two public nutritional databases:</p>
+  <ul>
+    <li><strong>Open Food Facts</strong> (world.openfoodfacts.org) — tried first for branded products. No personal information is included.</li>
+    <li><strong>USDA FoodData Central</strong> (api.nal.usda.gov) — used as a fallback for barcodes not found in Open Food Facts, and in parallel for name searches. No personal information is included.</li>
+  </ul>
 
   <h3>Device permissions</h3>
   <ul>
@@ -220,9 +224,14 @@ footer {
         <td>Account credentials, app content you create</td>
       </tr>
       <tr>
-        <td><strong>USDA FoodData Central</strong> (api.data.gov)</td>
-        <td>Barcode → nutrition lookup</td>
-        <td>Barcode number only</td>
+        <td><strong>Open Food Facts</strong> (world.openfoodfacts.org)</td>
+        <td>Barcode / name → nutrition lookup (primary)</td>
+        <td>Barcode number or food name only</td>
+      </tr>
+      <tr>
+        <td><strong>USDA FoodData Central</strong> (api.nal.usda.gov)</td>
+        <td>Barcode / name → nutrition lookup (fallback)</td>
+        <td>Barcode number or food name only</td>
       </tr>
       <tr>
         <td><strong>Anthropic</strong> (anthropic.com)</td>

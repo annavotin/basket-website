@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Basket — Meal prep, made simple.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ── tokens ── */
+:root {
+  --sage-bg:     #E7EEDD;
+  --sage-bg2:    #EDF2E6;
+  --sage-100:    #DCEACF;
+  --matcha:      #7CC96E;
+  --matcha-600:  #5FB152;
+  --matcha-deep: #3E8F38;
+  --forest:      #2C3A1E;
+  --forest-deep: #1E2914;
+  --moss:        #5A6B45;
+  --moss-faint:  #8A9A72;
+  --rose:        #EFA8C0;
+  --lime:        #CDEB6A;
+  --cream:       #FBFBF4;
+  --card-line:   rgba(44,58,30,.08);
+  --f: 'Merriweather', Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--f);
+  background: var(--cream);
+  color: var(--forest);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  height: 68px;
+  background: transparent;
+  transition: background .3s, border-color .3s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(30, 41, 20, .96);
+  border-color: rgba(255,255,255,.07);
+  backdrop-filter: blur(12px);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 11px;
+  text-decoration: none; color: var(--cream);
+}
+.nav-logo svg { flex-shrink: 0; }
+.nav-logo-name {
+  font-size: 18px; font-weight: 700; letter-spacing: -.01em;
+  color: var(--cream);
+}
+.nav-actions {
+  display: flex; align-items: center; gap: 12px;
+}
+.btn-download {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--lime); color: var(--forest-deep);
+  font-family: var(--f); font-size: 13px; font-weight: 700;
+  padding: 10px 20px; border-radius: 14px; text-decoration: none;
+  border: none; cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.btn-download:hover { background: #d9f570; transform: translateY(-1px); }
+.btn-ghost {
+  font-family: var(--f); font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,.6); background: none; border: none;
+  cursor: pointer; text-decoration: none;
+  transition: color .15s;
+}
+.btn-ghost:hover { color: #fff; }
+
+/* ── hero ── */
+.hero {
+  min-height: 100vh;
+  background: var(--forest-deep);
+  display: flex; align-items: center;
+  padding: 100px 48px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-gleam {
+  position: absolute; top: -120px; right: -80px;
+  width: 520px; height: 520px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(205,235,106,.18), transparent 65%);
+  pointer-events: none;
+}
+.hero-gleam2 {
+  position: absolute; bottom: -100px; left: 10%;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(124,201,110,.1), transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 420px;
+  gap: 64px; align-items: center;
+}
+.hero-text {}
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(205,235,106,.12); border: 1px solid rgba(205,235,106,.22);
+  border-radius: 20px; padding: 6px 14px; margin-bottom: 28px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--lime);
+}
+.hero-kicker span { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
+.hero-h1 {
+  font-size: clamp(40px, 4.5vw, 62px);
+  font-weight: 900; line-height: 1.06;
+  color: #fff; letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+.hero-h1 em {
+  font-style: italic; font-weight: 300;
+  color: var(--matcha-soft, #C6E1B4);
+}
+.hero-sub {
+  margin-top: 22px;
+  font-size: 17px; font-weight: 300; line-height: 1.7;
+  color: rgba(255,255,255,.55); max-width: 480px;
+  text-wrap: pretty;
+}
+.hero-ctas {
+  margin-top: 40px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+  align-items: center;
+}
+.cta-store {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 20px; border-radius: 16px; text-decoration: none;
+  font-family: var(--f); transition: transform .1s, opacity .15s;
+}
+.cta-store:hover { transform: translateY(-2px); opacity: .9; }
+.cta-store.apple {
+  background: #fff; color: var(--forest-deep);
+}
+.cta-store.google {
+  background: rgba(255,255,255,.1); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.18);
+}
+.cta-store-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.cta-store-text {}
+.cta-store-label { font-size: 10px; font-weight: 700; opacity: .6; letter-spacing: .05em; text-transform: uppercase; }
+.cta-store-name  { font-size: 15px; font-weight: 700; line-height: 1.2; margin-top: 1px; }
+
+/* ── phone mockup ── */
+.hero-phone {
+  display: flex; justify-content: center;
+}
+.device {
+  width: 280px; height: 588px;
+  background: #141c0e; border-radius: 46px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.07),
+    0 40px 80px rgba(0,0,0,.5),
+    0 16px 32px rgba(0,0,0,.3);
+}
+.screen {
+  width: 100%; height: 100%; border-radius: 36px;
+  background: var(--forest-deep); overflow: hidden;
+  position: relative;
+}
+.sb {
+  height: 44px; display: flex; align-items: center;
+  justify-content: space-between; padding: 14px 22px 0;
+  font-size: 11px; font-weight: 700; color: var(--cream);
+}
+.sb-right { display: flex; align-items: center; gap: 5px; }
+.sb-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
+
+/* mock app content inside phone */
+.mock-body { padding: 14px 16px 0; }
+.mock-head { margin-bottom: 14px; }
+.mock-head .hi { font-size: 19px; font-weight: 700; color: #fff; }
+.mock-head .sub { font-size: 11px; color: var(--matcha); font-weight: 700; margin-top: 2px; }
+
+.mock-cycle {
+  background: linear-gradient(135deg, var(--matcha), var(--matcha-deep));
+  border-radius: 20px; padding: 14px;
+  margin-bottom: 10px;
+}
+.mock-cycle .badge {
+  font-size: 9px; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 8px;
+}
+.mock-cycle .name { font-size: 15px; font-weight: 700; color: #fff; }
+.mock-cycle .dates { font-size: 10px; color: rgba(255,255,255,.65); margin-top: 2px; font-weight: 700; }
+.mock-cycle .items { display: flex; gap: 4px; margin-top: 10px; }
+.mock-cycle .chip {
+  background: rgba(255,255,255,.2); border-radius: 10px;
+  padding: 4px 9px; font-size: 10px; font-weight: 700; color: #fff;
+}
+
+.mock-budget {
+  background: rgba(255,255,255,.06); border-radius: 16px;
+  padding: 12px 13px; margin-bottom: 10px;
+}
+.mock-budget .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+.mock-budget .lbl { font-size: 10px; font-weight: 700; color: var(--matcha); }
+.mock-budget .val { font-size: 12px; font-weight: 700; color: #fff; }
+.mock-budget .bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; }
+.mock-budget .fill { height: 100%; border-radius: 3px; background: var(--lime); width: 62%; }
+
+.mock-items { display: flex; flex-direction: column; gap: 6px; }
+.mock-item {
+  display: flex; align-items: center; gap: 9px;
+  background: rgba(255,255,255,.06); border-radius: 14px; padding: 9px 11px;
+}
+.mock-item .av {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+  font-family: 'Apple Color Emoji','Segoe UI Emoji',sans-serif;
+}
+.mock-item .info .nm { font-size: 12px; font-weight: 700; color: #fff; }
+.mock-item .info .mt { font-size: 10px; color: rgba(255,255,255,.45); font-weight: 700; margin-top: 1px; }
+.mock-item .kc { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--matcha); }
+
+.home-ind {
+  position: absolute; bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 100px; height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,.2);
+}
+
+/* ── features ── */
+.features {
+  background: var(--sage-bg);
+  padding: 104px 48px;
+}
+.features-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.section-label {
+  font-size: 11px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--moss-faint);
+  margin-bottom: 16px;
+}
+.section-h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 900; line-height: 1.1; color: var(--forest);
+  letter-spacing: -.02em; text-wrap: pretty;
+  max-width: 540px; margin-bottom: 60px;
+}
+.section-h2 em { font-style: italic; font-weight: 300; color: var(--moss); }
+.features-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.feat-card {
+  background: var(--cream);
+  border-radius: 28px; padding: 36px 32px 34px;
+  border: 1px solid var(--card-line);
+}
+.feat-icon {
+  width: 52px; height: 52px; border-radius: 18px;
+  background: var(--sage-100); display: flex; align-items: center;
+  justify-content: center; font-size: 24px; margin-bottom: 22px;
+  font-family: 'Apple Color Emoji','Segoe UI Emoji',sans-serif;
+}
+.feat-icon.dark { background: var(--forest); }
+.feat-icon.green { background: var(--matcha-deep); }
+.feat-h3 {
+  font-size: 18px; font-weight: 700; color: var(--forest);
+  line-height: 1.25; margin-bottom: 10px; letter-spacing: -.01em;
+}
+.feat-p {
+  font-size: 13.5px; font-weight: 300; line-height: 1.7;
+  color: var(--moss); text-wrap: pretty;
+}
+
+/* ── simple divider section ── */
+.divider-band {
+  background: var(--forest);
+  padding: 80px 48px;
+}
+.divider-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 48px; flex-wrap: wrap;
+}
+.divider-copy .q {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700; color: #fff; line-height: 1.2;
+  text-wrap: pretty; max-width: 540px; letter-spacing: -.01em;
+}
+.divider-copy .q em { font-style: italic; font-weight: 300; color: var(--matcha-soft, #C6E1B4); }
+.divider-cta {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+
+/* ── footer ── */
+footer {
+  background: var(--forest-deep);
+  padding: 56px 48px 40px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.footer-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 48px; padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  flex-wrap: wrap;
+}
+.footer-brand {}
+.footer-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--cream); margin-bottom: 12px;
+}
+.footer-logo-name { font-size: 17px; font-weight: 700; }
+.footer-tagline {
+  font-size: 13px; font-weight: 300;
+  color: rgba(255,255,255,.4); max-width: 240px; line-height: 1.6;
+}
+.footer-cols {
+  display: flex; gap: 56px; flex-wrap: wrap;
+}
+.footer-col {}
+.footer-col-title {
+  font-size: 10px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--moss-faint);
+  margin-bottom: 16px;
+}
+.footer-links {
+  display: flex; flex-direction: column; gap: 10px; list-style: none;
+}
+.footer-links a {
+  font-size: 13.5px; font-weight: 400;
+  color: rgba(255,255,255,.55); text-decoration: none;
+  transition: color .15s;
+}
+.footer-links a:hover { color: #fff; }
+.footer-bottom {
+  margin-top: 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-copy {
+  font-size: 12px; color: rgba(255,255,255,.25); font-weight: 400;
+}
+.footer-legal-links {
+  display: flex; gap: 20px; list-style: none;
+}
+.footer-legal-links a {
+  font-size: 12px; color: rgba(255,255,255,.3);
+  text-decoration: none; transition: color .15s;
+}
+.footer-legal-links a:hover { color: rgba(255,255,255,.7); }
+
+</style>
+</head>
+<body>
+
+<!-- ── nav ── -->
+<nav id="nav">
+  <a class="nav-logo" href="#">
+    <svg viewBox="0 0 200 200" width="28" height="28" fill="none">
+      <path d="M46 21 H25 V61 Q25 87 51 87 H149 Q175 87 175 61 V21 H154"
+        stroke="#CDEB6A" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="61" y="13" width="78" height="22" rx="11" fill="#CDEB6A"/>
+      <path d="M46 116 H25 V156 Q25 182 51 182 H149 Q175 182 175 156 V116 H154"
+        stroke="rgba(255,255,255,.35)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="61" y="108" width="78" height="22" rx="11" fill="rgba(255,255,255,.35)"/>
+    </svg>
+    <span class="nav-logo-name">Basket</span>
+  </a>
+  <div class="nav-actions">
+    <a class="btn-ghost" href="#">Support</a>
+    <a class="btn-download" href="#">
+      <svg class="cta-store-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      </svg>
+      Download
+    </a>
+  </div>
+</nav>
+
+<!-- ── hero ── -->
+<section class="hero">
+  <div class="hero-gleam"></div>
+  <div class="hero-gleam2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-kicker">
+        <span></span>
+        Meal prep, simplified
+      </div>
+      <h1 class="hero-h1">
+        One prep.<br>
+        <em>The whole week,</em><br>
+        sorted.
+      </h1>
+      <p class="hero-sub">
+        Basket turns batch cooking into a calm, intentional routine — plan your cycles, track your calories, and shop with confidence.
+      </p>
+      <div class="hero-ctas">
+        <a class="cta-store apple" href="#">
+          <svg class="cta-store-icon" viewBox="0 0 24 24" fill="#1E2914">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div class="cta-store-text">
+            <div class="cta-store-label">Download on the</div>
+            <div class="cta-store-name">App Store</div>
+          </div>
+        </a>
+        <a class="cta-store google" href="#">
+          <svg class="cta-store-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3.18 23.76c.3.17.64.24.99.19l12.99-7.54-2.74-2.75-11.24 10.1zM.29 1.05C.11 1.37 0 1.76 0 2.21v19.58c0 .45.11.84.29 1.16l.06.06L10.72 12v-.24L.35.99l-.06.06zM20.56 10.3l-2.84-1.65-3.1 3.1 3.1 3.1 2.86-1.66c.82-.47.82-1.24-.02-1.89zM4.17.24l12.99 7.54-2.74 2.74L3.18.42C3.48-.04 3.87-.13 4.17.24z"/>
+          </svg>
+          <div class="cta-store-text">
+            <div class="cta-store-label">Get it on</div>
+            <div class="cta-store-name">Google Play</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- phone mockup -->
+    <div class="hero-phone">
+      <div class="device">
+        <div class="screen">
+          <div class="sb">
+            <span>9:41</span>
+            <div class="sb-right">
+              <div class="sb-dot"></div>
+              <span style="font-size:10px;opacity:.6;">4G</span>
+            </div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-head">
+              <div class="hi">Good morning 👋</div>
+              <div class="sub">Week of 23 Jun</div>
+            </div>
+            <div class="mock-cycle">
+              <div class="badge">Active prep · Day 3 of 5</div>
+              <div class="name">Meal Prep</div>
+              <div class="dates">23 – 27 Jun</div>
+              <div class="items">
+                <div class="chip">🐟 Salmon</div>
+                <div class="chip">🍠 Sweet Potato</div>
+                <div class="chip">🥬 Kale</div>
+              </div>
+            </div>
+            <div class="mock-budget">
+              <div class="row">
+                <span class="lbl">Daily budget</span>
+                <span class="val">1,680 / 2,000 kcal</span>
+              </div>
+              <div class="bar"><div class="fill"></div></div>
+            </div>
+            <div class="mock-items">
+              <div class="mock-item">
+                <div class="av">🐟</div>
+                <div class="info">
+                  <div class="nm">Salmon</div>
+                  <div class="mt">600 g · barcode</div>
+                </div>
+                <div class="kc">1,254</div>
+              </div>
+              <div class="mock-item">
+                <div class="av">🍠</div>
+                <div class="info">
+                  <div class="nm">Sweet Potato</div>
+                  <div class="mt">500 g · manual</div>
+                </div>
+                <div class="kc">430</div>
+              </div>
+              <div class="mock-item">
+                <div class="av">🌾</div>
+                <div class="info">
+                  <div class="nm">Oats</div>
+                  <div class="mt">pantry · 40 g/day</div>
+                </div>
+                <div class="kc">152</div>
+              </div>
+            </div>
+          </div>
+          <div class="home-ind"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── features ── -->
+<section class="features">
+  <div class="features-inner">
+    <div class="section-label">What Basket does</div>
+    <h2 class="section-h2">Built around<br><em>how you actually eat.</em></h2>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">🗓️</div>
+        <h3 class="feat-h3">Plan your week in one prep</h3>
+        <p class="feat-p">Schedule meal-prep cycles across the calendar. Shop once, eat intentionally all week. Add extra meals for days when plans change.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon dark" style="font-size:20px; color: #CDEB6A;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="4" rx="2" fill="#CDEB6A"/>
+            <rect x="3" y="10" width="14" height="4" rx="2" fill="rgba(205,235,106,.5)"/>
+            <rect x="3" y="17" width="9" height="4" rx="2" fill="rgba(205,235,106,.25)"/>
+          </svg>
+        </div>
+        <h3 class="feat-h3">Your calories, as a budget</h3>
+        <p class="feat-p">Meal prep, pantry staples, and extras — all tracked against your daily goal. See exactly where your calories come from, every day.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon green" style="font-size:20px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="2"/>
+            <path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="feat-h3">Nothing falls through the cracks</h3>
+        <p class="feat-p">Track pantry staples that spread across every prep. Log one-off extras when you eat out. Leftovers carry forward automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── cta band ── -->
+<section class="divider-band">
+  <div class="divider-inner">
+    <div class="divider-copy">
+      <p class="q">Ready to make meal prep<br><em>feel effortless?</em></p>
+    </div>
+    <div class="divider-cta">
+      <a class="cta-store apple" href="#">
+        <svg class="cta-store-icon" viewBox="0 0 24 24" fill="#1E2914">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <div class="cta-store-text">
+          <div class="cta-store-label">Download on the</div>
+          <div class="cta-store-name">App Store</div>
+        </div>
+      </a>
+      <a class="cta-store google" href="#">
+        <svg class="cta-store-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3.18 23.76c.3.17.64.24.99.19l12.99-7.54-2.74-2.75-11.24 10.1zM.29 1.05C.11 1.37 0 1.76 0 2.21v19.58c0 .45.11.84.29 1.16l.06.06L10.72 12v-.24L.35.99l-.06.06zM20.56 10.3l-2.84-1.65-3.1 3.1 3.1 3.1 2.86-1.66c.82-.47.82-1.24-.02-1.89zM4.17.24l12.99 7.54-2.74 2.74L3.18.42C3.48-.04 3.87-.13 4.17.24z"/>
+        </svg>
+        <div class="cta-store-text">
+          <div class="cta-store-label">Get it on</div>
+          <div class="cta-store-name">Google Play</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="footer-logo" href="#">
+          <svg viewBox="0 0 200 200" width="24" height="24" fill="none">
+            <path d="M46 21 H25 V61 Q25 87 51 87 H149 Q175 87 175 61 V21 H154"
+              stroke="#CDEB6A" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="61" y="13" width="78" height="22" rx="11" fill="#CDEB6A"/>
+            <path d="M46 116 H25 V156 Q25 182 51 182 H149 Q175 182 175 156 V116 H154"
+              stroke="rgba(255,255,255,.3)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="61" y="108" width="78" height="22" rx="11" fill="rgba(255,255,255,.3)"/>
+          </svg>
+          <span class="footer-logo-name">Basket</span>
+        </a>
+        <p class="footer-tagline">Meal prep, made simple.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">App</div>
+          <ul class="footer-links">
+            <li><a href="#">Download</a></li>
+            <li><a href="#">What's New</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Help</div>
+          <ul class="footer-links">
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Basket. All rights reserved.</p>
+      <ul class="footer-legal-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+</script>
+
+</body>
+</html>
